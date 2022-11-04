@@ -1,5 +1,6 @@
 package be.ixor.speakerscorner.threads.completablefuture.rest;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -10,7 +11,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -22,9 +22,9 @@ class IxorControllerIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    void one() throws Exception {
+    void normal() throws Exception {
         String contentAsString = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/ixor/one"))
+                        .get("/ixor/normal"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
@@ -68,6 +68,27 @@ class IxorControllerIntegrationTest {
                 .getResponse()
                 .getContentAsString();
         assertThat(contentAsString).isEqualTo("one two");
+    }
+
+    @Test
+    void virtual1() throws Exception {
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/ixor/virtual1"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        assertThat(contentAsString).contains("one two");
+    }
+
+    @Disabled
+    @Test
+    void virtual2() throws Exception {
+        String contentAsString = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/ixor/virtual2"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        assertThat(contentAsString).contains("quotation");
     }
 
 }

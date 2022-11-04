@@ -1,6 +1,8 @@
 package be.ixor.speakerscorner.threads.completablefuture.rest;
 
 
+import be.ixor.speakerscorner.threads.completablefuture.IxorThreadUtil;
+
 import java.util.Set;
 
 public class SlowService {
@@ -21,15 +23,10 @@ public class SlowService {
 
 
     private void sleep() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        IxorThreadUtil.sleep();
     }
 
     private void printThreads() {
-        Set<Thread> threads = Thread.getAllStackTraces().keySet();
-        System.out.println("de threads: " + threads);
+        IxorThreadUtil.printThreads();
     }
 }
