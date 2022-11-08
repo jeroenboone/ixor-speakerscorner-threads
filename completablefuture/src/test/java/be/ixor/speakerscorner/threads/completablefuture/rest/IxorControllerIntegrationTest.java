@@ -1,7 +1,6 @@
 package be.ixor.speakerscorner.threads.completablefuture.rest;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,12 +15,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class IxorControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
+    @Order(1)
+    void warmup(){
+
+    }
+
+    @Test
+    @Order(2)
     void normal() throws Exception {
         String contentAsString = mockMvc.perform(MockMvcRequestBuilders
                         .get("/ixor/normal"))
